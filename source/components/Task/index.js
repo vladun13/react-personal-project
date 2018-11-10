@@ -120,7 +120,7 @@ export default class Task extends PureComponent {
         );
     };
 
-    _updateTaskmessageOnClick = () => {
+    _updateTaskMessageOnClick = () => {
         const { isTaskEditing } = this.state;
 
         if(isTaskEditing) {

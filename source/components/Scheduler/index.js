@@ -21,7 +21,7 @@ export default class Scheduler extends Component {
 	};
 
 	componentDidMount () {
-		this._fetchTaskAsync();
+		this._fetchTasksAsync();
 	}
 
 	_setTasksFetchingState = (isTasksFetching) => {
@@ -54,7 +54,7 @@ export default class Scheduler extends Component {
 		return null;
 	};
 
-	_fetchTaskAsync = async () => {
+	_fetchTasksAsync = async () => {
 		try {
 			this._setTasksFetchingState(true);
 			const tasks = await api.fetchedTasks();
@@ -170,7 +170,7 @@ export default class Scheduler extends Component {
 		}
 	};
 
-	_updateTaskmessage = (event) => {
+	_updateNewTaskMessage = (event) => {
 		const { value : newTaskMessage } = event.target;
 
 		this.setState({ newTaskMessage });
@@ -219,7 +219,7 @@ export default class Scheduler extends Component {
                 					placeholder = "Описaние моей новой задачи" 
                 					type = "text"
                 					value = { newTaskMessage }
-                					onChange = { this._updateTaskmessage }
+                					onChange = { this._updateNewTaskMessage }
                 					/>
                 					<button>
                 						Добавить задачу
