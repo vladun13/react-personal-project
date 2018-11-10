@@ -3,10 +3,18 @@ import React, { Component } from 'react';
 
 // Instruments
 import Styles from './styles.m.css';
+import PropTypes from 'prop-types';
 
 export default class Spinner extends Component {
-    render () {
+	static propTypes = {
+		isSpinning: PropTypes.bool.isRequired,
+	};
 
-        return <div className = { Styles.spinner } />;
+    render () {
+    	const { isSpinning } = this.props;
+
+        return (
+        	isSpinning? <div className = { Styles.spinner } /> : null
+    	);	
     }
 }
