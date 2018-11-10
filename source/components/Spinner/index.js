@@ -14,7 +14,7 @@ export default class Spinner extends Component {
     	const { isSpinning } = this.props;
 
         return (
-        	isSpinning? <div className = { Styles.spinner } /> : null
+        	isSpinning ? <div className = { Styles.spinner } /> : null
     	);	
     }
 }
