@@ -33,6 +33,14 @@ export default class Task extends PureComponent {
         message,
     });
 
+    static propTypes = {
+        id:               PropTypes.string.isRequired,
+        completed:        PropTypes.bool.isRequired,
+        favorite:         PropTypes.bool.isRequired,
+        message:          PropTypes.string.isRequired,
+        _removeTaskAsync: PropTypes.func.isRequired,
+        _updateTaskAsync: PropTypes.func.isRequired,
+    };
 
     _setTaskEditingState = (isTaskEditing) => {
         this.setState(

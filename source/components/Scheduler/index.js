@@ -23,19 +23,8 @@ export default class Scheduler extends Component {
     componentDidMount () {
         this._fetchTasksAsync();
     }
-    _setTasksFetchingState = (isTasksFetching) => {
-        this.setState({
-            isTasksFetching,
-        });
-    };
 
-    _updateTasksFilter = (event) => {
-        const { value }  = event.target;
-
-        this.setState({ tasksFilter: value.toLowerCase() });
-
-        this._filterTask();
-    };
+    
 
     _filterTask = () => {
         const { tasks, tasksFilter } = this.state;
@@ -52,6 +41,20 @@ export default class Scheduler extends Component {
 
     };
 
+    _updateTasksFilter = (event) => {
+        const { value }  = event.target;
+
+        this.setState({ tasksFilter: value.toLowerCase() });
+
+        this._filterTask();
+    };
+
+    _setTasksFetchingState = (isTasksFetching) => {
+        this.setState({
+            isTasksFetching,
+        });
+    };
+    
     _fetchTasksAsync = async () => {
         try {
             this._setTasksFetchingState(true);
@@ -93,22 +96,6 @@ export default class Scheduler extends Component {
 
     };
 
-    _removeTaskAsync = async (id) => {
-        try {
-            this._setTasksFetchingState(true);
-
-            await api.removeTask(id);
-
-            this.setState(({ tasks }) => ({
-                tasks: tasks.filter((task) => task.id !== id),
-            }));
-        } catch ({ message }) {
-            console.log(message);
-        } finally {
-            this._setTasksFetchingState(false);
-        }
-    };
-
     _updateTaskAsync = async (taskToUpdate) => {
         try {
             this._setTasksFetchingState(true);
@@ -133,6 +120,28 @@ export default class Scheduler extends Component {
         }
     };
 
+    _updateNewTaskMessage = (event) => {
+        const { value : newTaskMessage }  = event.target;
+
+        this.setState({ newTaskMessage });
+    };
+
+    _removeTaskAsync = async (id) => {
+        try {
+            this._setTasksFetchingState(true);
+
+            await api.removeTask(id);
+
+            this.setState(({ tasks }) => ({
+                tasks: tasks.filter((task) => task.id !== id),
+            }));
+        } catch ({ message }) {
+            console.log(message);
+        } finally {
+            this._setTasksFetchingState(false);
+        }
+    };
+    
     _getAllCompleted = () => {
         return this.state.tasks.every((task) => task.completed);
     };
@@ -167,11 +176,6 @@ export default class Scheduler extends Component {
         }
     };
 
-    _updateNewTaskMessage = (event) => {
-        const { value : newTaskMessage }  = event.target;
-
-        this.setState({ newTaskMessage });
-    };
 
     render () {
         const { tasks, isTasksFetching, newTaskMessage, tasksFilter } = this.state;

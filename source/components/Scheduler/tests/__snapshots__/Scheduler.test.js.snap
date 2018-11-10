@@ -5,18 +5,18 @@ exports[`Компонент Scheduler: должен иметь базовую р
   <section
     className="scheduler"
   >
-    <header>
-      <h1>
-        Планировщик задач
-      </h1>
-      <input
-        onChange={[MockFunction]}
-        placeholder="Поиск"
-        type="search"
-        value=""
-      />
-    </header>
     <main>
+      <header>
+        <h1>
+          Планировщик задач
+        </h1>
+        <input
+          onChange={[MockFunction]}
+          placeholder="Поиск"
+          type="search"
+          value=""
+        />
+      </header>
       <Spinner
         isSpinning={true}
       >
@@ -60,7 +60,7 @@ exports[`Компонент Scheduler: должен иметь базовую р
                   className="content"
                 >
                   <withSvg(Checkbox)
-                    checked={true}
+                    checked={false}
                     className="toggleTaskCompletedState"
                     color1="#3B8EF3"
                     color2="#FFF"
@@ -94,7 +94,7 @@ exports[`Компонент Scheduler: должен иметь базовую р
                         viewBox="0 0 27 27"
                       >
                         <Checkbox
-                          checked={true}
+                          checked={false}
                           className="toggleTaskCompletedState"
                           color1="#3B8EF3"
                           color2="#FFF"
@@ -104,7 +104,7 @@ exports[`Компонент Scheduler: должен иметь базовую р
                         >
                           <g>
                             <rect
-                              fill="#3B8EF3"
+                              fill="#FFF"
                               height="25"
                               rx="5"
                               ry="5"
