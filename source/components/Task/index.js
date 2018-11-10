@@ -14,13 +14,6 @@ import Star from '../../theme/assets/Star';
 
 export default class Task extends PureComponent {
 
-    state = {
-        isTaskEditing: false,
-        newMessage: this.props.message,
-    };
-
-    taskInput = createRef();
-
     _getTaskShape = ({
         id = this.props.id,
         completed = this.props.completed,
@@ -33,6 +26,13 @@ export default class Task extends PureComponent {
         message,
     });
 
+    state = {
+        isTaskEditing: false,
+        newMessage: this.props.message,
+    };
+
+    taskInput = React.createRef();
+
     static propTypes = {
         id:               PropTypes.string.isRequired,
         completed:        PropTypes.bool.isRequired,
@@ -43,6 +43,7 @@ export default class Task extends PureComponent {
     };
 
     _setTaskEditingState = (isTaskEditing) => {
+        this.taskInput.current.disabled = !isTaskEditing;
         this.setState(
         {
             isTaskEditing,
@@ -150,7 +151,6 @@ export default class Task extends PureComponent {
     render () {
         const { completed, favorite, message } = this.props;
         const { isTaskEditing, newMessage } = this.state;
-        const currentMessage = isTaskEditing ? newMessage : message;
 
         return (
                 <li className = { cx(Styles.task, {
@@ -170,7 +170,7 @@ export default class Task extends PureComponent {
                                 maxLength = { 50 }
                                 ref = { this.taskInput }    
                                 type = "text"
-                                value = { currentMessage }
+                                value = { newMessage }
                                 onChange = { this._updateNewTaskMessage }
                                 onKeyDown = { this._updateTaskMessageOnKeyDown }
                             />
